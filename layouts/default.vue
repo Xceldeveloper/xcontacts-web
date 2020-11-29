@@ -10,6 +10,11 @@ export default {
     return {
      
     }
-  }
+  },
+    mounted(){
+    //polifix for persisent scrollbar
+   let eHtml = document.getElementsByTagName('html')[0]
+   eHtml.style.overflowY = 'hidden'
+  },
 }
 </script>
