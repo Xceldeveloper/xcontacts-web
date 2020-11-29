@@ -6,10 +6,8 @@
       <v-btn icon><v-icon>mdi-magnify</v-icon></v-btn>
     </v-app-bar>
 
-    <div id="wrapperx">
-
-    </div>
-        <v-bottom-navigation
+    <div id="wrapperx"></div>
+    <v-bottom-navigation
       v-model="navIndex"
       grow
       dense
@@ -21,17 +19,17 @@
       color="primary"
     >
       <v-btn @click="selectComponent('contacts')">
-        <span>Hangouts</span>
+        <span>Contacts</span>
         <v-icon>mdi-account</v-icon>
       </v-btn>
 
       <v-btn @click="selectComponent('favourites')">
-        <span>DMs</span>
+        <span>Favourites</span>
         <v-icon>mdi-star</v-icon>
       </v-btn>
 
       <v-btn @click="selectComponent('labels')">
-        <span>Search</span>
+        <span>Labels</span>
         <v-icon>mdi-label</v-icon>
       </v-btn>
     </v-bottom-navigation>
@@ -40,22 +38,21 @@
 
 <script>
 export default {
-  data(){
-    return{
-      navIndex:0,
-      selectedComponent:''
-    }
+  data() {
+    return {
+      navIndex: 0,
+      selectedComponent: "",
+    };
   },
-   methods: {
+  methods: {
     selectComponent(component) {
-      this.selectedComponent = component
+      this.selectedComponent = component;
     },
   },
 };
 </script>
 <style lang="scss" scoped>
-
-#wrapperx{
+#wrapperx {
   width: 100%;
   overflow: auto;
   height: calc(100vh - 100px);
