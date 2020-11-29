@@ -1,12 +1,13 @@
 <template>
   <div>
-    <v-app-bar dense elevation="3" color="primary">
+    <v-app-bar dense elevation="3" color="primary" dark>
       <v-toolbar-title>XcelContacts</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn icon><v-icon>mdi-magnify</v-icon></v-btn>
     </v-app-bar>
-
-    <div id="wrapperx"></div>
+    <div id="wrapperx">
+      <component :is="selectedComponent" > </component>
+    </div>
     <v-bottom-navigation
       v-model="navIndex"
       grow
@@ -20,28 +21,39 @@
     >
       <v-btn @click="selectComponent('contacts')">
         <span>Contacts</span>
-        <v-icon>mdi-account</v-icon>
+        <v-icon v-if="selectedComponent == 'contacts'">mdi-account</v-icon>
+        <v-icon v-else>mdi-account-outline</v-icon>
       </v-btn>
 
       <v-btn @click="selectComponent('favourites')">
         <span>Favourites</span>
-        <v-icon>mdi-star</v-icon>
+        <v-icon v-if="selectedComponent == 'favourites'">mdi-star</v-icon>
+        <v-icon v-else>mdi-star-outline</v-icon>
       </v-btn>
 
       <v-btn @click="selectComponent('labels')">
         <span>Labels</span>
-        <v-icon>mdi-label</v-icon>
+        <v-icon v-if="selectedComponent == 'labels'">mdi-label</v-icon>
+        <v-icon v-else>mdi-label-outline</v-icon>
       </v-btn>
     </v-bottom-navigation>
   </div>
 </template>
 
 <script>
+import contacts from "~/components/contacts.vue";
+import favourites from "~/components/favourites.vue";
+import labels from "~/components/labels.vue";
 export default {
+  components: {
+    contacts: contacts,
+    favourites: favourites,
+    labels: labels,
+  },
   data() {
     return {
       navIndex: 0,
-      selectedComponent: "",
+      selectedComponent: "contacts",
     };
   },
   methods: {
@@ -55,7 +67,6 @@ export default {
 #wrapperx {
   width: 100%;
   overflow: auto;
-  height: calc(100vh - 100px);
-  border: 1px solid red;
+  height: calc(100vh - 103px);
 }
 </style>
