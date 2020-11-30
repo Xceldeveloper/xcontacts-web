@@ -6,66 +6,12 @@ export default {
     methods: {
         getContacts() {
             var contacts = localStorage.getItem('contacts')
-            console.log(contacts)
+            //console.log(contacts)
             if (contacts == null) {
-                return [{
-                    id: 1,
-                    name: "Overcomer Emaitor",
-                    avatar: "",
-                    favourite: false,
-                },
-                {
-                    id: 23,
-                    name: "Jack Dorsey",
-                    avatar:
-                        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Larry_Page_in_the_European_Parliament%2C_17.06.2009_%28cropped%29.jpg/220px-Larry_Page_in_the_European_Parliament%2C_17.06.2009_%28cropped%29.jpg",
-                    favourite: true,
-                },
-                {
-                    id: 2,
-                    name: "Larry Paige",
-                    avatar:
-                        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Larry_Page_in_the_European_Parliament%2C_17.06.2009_%28cropped%29.jpg/220px-Larry_Page_in_the_European_Parliament%2C_17.06.2009_%28cropped%29.jpg",
-                    favourite: false,
-                },
-                {
-                    id: 4,
-                    name: "Elon Musk",
-                    avatar:
-                        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Larry_Page_in_the_European_Parliament%2C_17.06.2009_%28cropped%29.jpg/220px-Larry_Page_in_the_European_Parliament%2C_17.06.2009_%28cropped%29.jpg",
-                    favourite: true,
-                },
-                {
-                    id: 1,
-                    name: "Overcomer Emaitor",
-                    avatar: "",
-                    favourite: false,
-                },
-                {
-                    id: 23,
-                    name: "Jack Dorsey",
-                    avatar:
-                        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Larry_Page_in_the_European_Parliament%2C_17.06.2009_%28cropped%29.jpg/220px-Larry_Page_in_the_European_Parliament%2C_17.06.2009_%28cropped%29.jpg",
-                    favourite: true,
-                },
-                {
-                    id: 2,
-                    name: "Larry Paige",
-                    avatar:
-                        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Larry_Page_in_the_European_Parliament%2C_17.06.2009_%28cropped%29.jpg/220px-Larry_Page_in_the_European_Parliament%2C_17.06.2009_%28cropped%29.jpg",
-                    favourite: false,
-                },
-                {
-                    id: 4,
-                    name: "Elon Musk",
-                    avatar:
-                        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Larry_Page_in_the_European_Parliament%2C_17.06.2009_%28cropped%29.jpg/220px-Larry_Page_in_the_European_Parliament%2C_17.06.2009_%28cropped%29.jpg",
-                    favourite: true,
-                }
-            ]
+                return []
             } else {
-                var res = JSON.stringify(contacts)
-                return res
+                var res = JSON.parse(contacts)
+                return res.sort((a, b) => a.name.localeCompare(b.name))
             }
         },
 
@@ -73,46 +19,51 @@ export default {
             var contacts = localStorage.getItem('contacts');
             if (contacts == null) {
 
-                contacts = [{
-                    id: 1,
-                    name: "Overcomer Emaitor",
-                    avatar: "",
-                    favourite: false,
-                },
-                {
-                    id: 23,
-                    name: "Jack Dorsey",
-                    avatar:
-                        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Larry_Page_in_the_European_Parliament%2C_17.06.2009_%28cropped%29.jpg/220px-Larry_Page_in_the_European_Parliament%2C_17.06.2009_%28cropped%29.jpg",
-                    favourite: true,
-                },
-                {
-                    id: 2,
-                    name: "Larry Paige",
-                    avatar:
-                        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Larry_Page_in_the_European_Parliament%2C_17.06.2009_%28cropped%29.jpg/220px-Larry_Page_in_the_European_Parliament%2C_17.06.2009_%28cropped%29.jpg",
-                    favourite: false,
-                },
-                {
-                    id: 4,
-                    name: "Elon Musk",
-                    avatar:
-                        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Larry_Page_in_the_European_Parliament%2C_17.06.2009_%28cropped%29.jpg/220px-Larry_Page_in_the_European_Parliament%2C_17.06.2009_%28cropped%29.jpg",
-                    favourite: true,
-                }]
-
-                return contacts.filter((item) => {
-                    return item.favourite;
-                });
+                return []
 
             } else {
-                var res = JSON.stringify(contacts)
+                var res = JSON.parse(contacts)
 
-                return res.filter((item) => {
+                var rex = res.filter((item) => {
                     return item.favourite;
                 });
+
+                return rex.sort((a, b) => a.name.localeCompare(b.name))
             }
-        }
+        },
+
+        getPriority(priority) {
+            var contacts = localStorage.getItem('contacts');
+            if (contacts == null) {
+
+                return []
+
+            } else {
+                var res = JSON.parse(contacts)
+
+                var rex = res.filter((item) => {
+                    return item.priority.indexOf(priority) != -1;
+                });
+
+                return rex.sort((a, b) => a.name.localeCompare(b.name))
+            }
+        },
+
+        saveNewContact(contact) {
+            var contacts = localStorage.getItem('contacts');
+            if (contacts == null) {
+                let contactx = []
+                contactx.push(contact)
+                let todb = JSON.stringify(contactx);
+                localStorage.setItem('contacts', todb)
+            } else {
+                var res = JSON.parse(contacts)
+                res.push(contact)
+                let todb = JSON.stringify(res);
+                localStorage.setItem('contacts', todb)
+            }
+        },
+
     }
 
 
