@@ -46,7 +46,7 @@
       </v-list>
 
       <!-- search history -->
-      <v-list v-if="filtered_contact.length == 0 && query == ''">
+      <v-list v-if="filtered_contact.length == 0 && query == '' && history_query.length > 0">
         History
         <v-list-item
           link
@@ -73,12 +73,19 @@
         </v-list-item>
       </v-list>
     </div>
+
+     <contactinfo @close="showInfo= false" :id="selectedIndex" :canShow="showInfo"/>
+   
   </div>
 </template>
 
 <script>
 import utils from "~/mixins/utils.js";
+import contactinfo from "~/components/contactinfo.vue"
 export default {
+   components:{
+    contactinfo
+  },
   mixins: [utils],
   data() {
     return {
@@ -86,6 +93,8 @@ export default {
       history_query: [],
       filtered_contact: [],
       query: "",
+      selectedIndex:-1,
+      showInfo:false
     };
   },
   mounted() {
@@ -100,16 +109,19 @@ export default {
       return arr[Math.floor(Math.random() * arr.length)];
     },
     clickedContact(index) {
-      console.log(this.contacts[index].name);
 
+      this.selectedIndex = this.contacts[index].id 
+      this.showInfo = true
+     
       //add to search history
-      this.addToSearchHistory(this.filtered_contact[index]);
+      this.addToSearchHistory(this.filtered_contact[index].id);
 
       //refresh search history
       this.history_query = this.getSearchedContacts();
     },
     clickedHistoryContact(index) {
-
+      this.selectedIndex = this.history_query[index].id 
+      this.showInfo = true
     },
   },
   computed: {

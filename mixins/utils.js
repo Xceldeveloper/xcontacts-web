@@ -6,7 +6,7 @@ export default {
     methods: {
         getContacts() {
             var contacts = localStorage.getItem('contacts')
-            console.log(contacts)
+            // console.log(contacts)
             if (contacts == null) {
                 return []
             } else {
@@ -22,7 +22,19 @@ export default {
                 return []
             } else {
                 var res = JSON.parse(contacts)
-                return res.sort((a, b) => a.name.localeCompare(b.name))
+                var history = [];
+
+                for (let index = 0; index < res.length; index++) {
+                    const element = res[index];
+                    let nh = this.getContactInfo(element)
+                    if (nh !== undefined) {
+                        history.push(nh)
+                    } else {
+                        this.deleteContact(element)
+                    }
+                }
+
+                return history
             }
         },
 
@@ -48,7 +60,7 @@ export default {
             for (let index = 0; index < array.length; index++) {
                 if (array[index].id == id) {
                     array[index].favourite = state
-                    console.log(JSON.stringify(array[index].favourite))
+                    //   console.log(JSON.stringify(array[index].favourite))
                     var updated = JSON.stringify(array)
                     localStorage.setItem('contacts', updated)
                     break;
@@ -131,18 +143,25 @@ export default {
             }
         },
 
-        addToSearchHistory(contact) {
+        addToSearchHistory(id) {
             var contacts = localStorage.getItem('search_query');
             if (contacts == null) {
                 let contactx = []
-                contactx.push(contact)
+                contactx.push(id)
                 let todb = JSON.stringify(contactx);
                 try { localStorage.setItem('search_query', todb) } catch (err) {
 
                 }
             } else {
                 var res = JSON.parse(contacts)
-                res.push(contact)
+                if (res.indexOf(id) != -1) {
+                    res.splice(res.indexOf(id), 1)
+                    //  console.log('already in db')
+
+                }
+                res.push(id)
+
+
                 let todb = JSON.stringify(res);
                 try { localStorage.setItem('search_query', todb) } catch (err) {
 
