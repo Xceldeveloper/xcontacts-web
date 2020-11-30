@@ -61,9 +61,6 @@ export default {
       var arr = ["red", "green", "brown", "yellow"];
       return arr[Math.floor(Math.random() * arr.length)];
     },
-    markAsFavourite(index) {
-      this.contacts[index].favourite = !this.contacts[index].favourite;
-    },
     clickedContact(index) {
       console.log(this.contacts[index].name);
     },
