@@ -1,5 +1,5 @@
 <template>
-  <v-bottom-sheet v-model="canShow" scrollable max-width="500" >
+  <v-bottom-sheet v-model="canShow" scrollable max-width="700">
     <v-card style="border-radius: 10px 10px 0px 0px">
       <v-card-text style="padding: 0px">
         <v-img
@@ -93,7 +93,7 @@
           </v-list-item-title>
         </v-list-item>
 
-        <v-btn color="primary" block>
+        <v-btn color="primary" block :to="'/edit/' + this.id">
           <v-icon>mdi-pen</v-icon>
         </v-btn>
       </v-card-text>
@@ -165,7 +165,29 @@ export default {
         }
       }
     },
-    add(which) {},
+    add(which) {
+      if (which == "phone") {
+        if (this.phone == "") {
+          this.$router.push("/edit/" + this.id);
+        }
+      } else if (which == "email") {
+        if (this.email == "") {
+          this.$router.push("/edit/" + this.id);
+        }
+      } else if (which == "address") {
+        if (this.address == "") {
+          this.$router.push("/edit/" + this.id);
+        }
+      } else if (which == "note") {
+        if (this.note == "") {
+          this.$router.push("/edit/" + this.id);
+        }
+      } else if (which == "priority") {
+        if (this.priorities.length == 0) {
+          this.$router.push("/edit/" + this.id);
+        }
+      }
+    },
   },
   watch: {
     id(value) {

@@ -92,6 +92,18 @@ export default {
             }
         },
 
+        deleteContact(id) {
+            var array = JSON.parse(localStorage.getItem('contacts'));
+            for (let index = 0; index < array.length; index++) {
+                if (array[index].id == id) {
+                    array.splice(index, 1)//delete
+                    var updated = JSON.stringify(array)
+                    localStorage.setItem('contacts', updated)
+                    break;
+                }
+            }
+        },
+
         saveNewContact(contact) {
             var contacts = localStorage.getItem('contacts');
             if (contacts == null) {
@@ -104,6 +116,18 @@ export default {
                 res.push(contact)
                 let todb = JSON.stringify(res);
                 try { localStorage.setItem('contacts', todb) } catch (err) { }
+            }
+        },
+
+        updateContact(contact) {
+            var array = JSON.parse(localStorage.getItem('contacts'));
+            for (let index = 0; index < array.length; index++) {
+                if (array[index].id == contact.id) {
+                    array[index] = contact
+                    var updated = JSON.stringify(array)
+                    localStorage.setItem('contacts', updated)
+                    break;
+                }
             }
         },
 
