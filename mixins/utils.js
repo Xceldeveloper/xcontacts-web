@@ -15,6 +15,17 @@ export default {
             }
         },
 
+        getSearchedContacts() {
+            var contacts = localStorage.getItem('search_query')
+            //console.log(contacts)
+            if (contacts == null) {
+                return []
+            } else {
+                var res = JSON.parse(contacts)
+                return res.sort((a, b) => a.name.localeCompare(b.name))
+            }
+        },
+
         getFavourites() {
             var contacts = localStorage.getItem('contacts');
             if (contacts == null) {
@@ -63,6 +74,21 @@ export default {
                 localStorage.setItem('contacts', todb)
             }
         },
+
+        addToSearchHistory(contact){
+            var contacts = localStorage.getItem('search_query');
+            if (contacts == null) {
+                let contactx = []
+                contactx.push(contact)
+                let todb = JSON.stringify(contactx);
+                localStorage.setItem('search_query', todb)
+            } else {
+                var res = JSON.parse(contacts)
+                res.push(contact)
+                let todb = JSON.stringify(res);
+                localStorage.setItem('search_query', todb)
+            }
+        }
 
     }
 

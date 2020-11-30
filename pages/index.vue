@@ -3,7 +3,7 @@
     <v-app-bar dense elevation="3" color="primary" dark>
       <v-toolbar-title>XcelContacts</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn icon><v-icon>mdi-magnify</v-icon></v-btn>
+      <v-btn icon to="/search"><v-icon>mdi-magnify</v-icon></v-btn>
     </v-app-bar>
     <div id="wrapperx">
       <component :is="selectedComponent" > </component>
