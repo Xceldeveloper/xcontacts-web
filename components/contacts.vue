@@ -39,49 +39,30 @@
     <v-btn
       fab
       color="primary"
-      style="position: absolute; right: 20px; bottom: 20px"
+      style="position: fixed; right: 20px; bottom: 75px"
       ><v-icon>mdi-account-plus</v-icon></v-btn
     >
+
+    <v-snackbar v-model="value"> snackbarText </v-snackbar>
   </div>
 </template>
 
 <script>
+import utils from "~/mixins/utils.js";
 export default {
+  mixins: [utils],
   data() {
     return {
-      contacts: [
-        {
-          id: 1,
-          name: "Overcomer Emaitor",
-          avatar: "",
-          favourite: false,
-        },
-        {
-          id: 23,
-          name: "Jack Dorsey",
-          avatar:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Larry_Page_in_the_European_Parliament%2C_17.06.2009_%28cropped%29.jpg/220px-Larry_Page_in_the_European_Parliament%2C_17.06.2009_%28cropped%29.jpg",
-          favourite: true,
-        },
-        {
-          id: 2,
-          name: "Larry Paige",
-          avatar:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Larry_Page_in_the_European_Parliament%2C_17.06.2009_%28cropped%29.jpg/220px-Larry_Page_in_the_European_Parliament%2C_17.06.2009_%28cropped%29.jpg",
-          favourite: false,
-        },
-        {
-          id: 4,
-          name: "Elon Musk",
-          avatar:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Larry_Page_in_the_European_Parliament%2C_17.06.2009_%28cropped%29.jpg/220px-Larry_Page_in_the_European_Parliament%2C_17.06.2009_%28cropped%29.jpg",
-          favourite: true,
-        },
-      ],
+      contacts: [],
     };
   },
+  mounted() {
+    this.contacts = this.getContacts();
+  },
+
   methods: {
     getRandColor(index) {
+      //random background color for avatar
       var arr = ["red", "green", "brown", "yellow"];
       return arr[Math.floor(Math.random() * arr.length)];
     },
@@ -102,6 +83,6 @@ export default {
   overflow: auto;
   max-width: 800px;
   margin: auto;
-  position: relative;
+  padding: 3px 0px;
 }
 </style>
