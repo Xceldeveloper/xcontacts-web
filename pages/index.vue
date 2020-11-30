@@ -31,9 +31,9 @@
         <v-icon v-else>mdi-star-outline</v-icon>
       </v-btn>
 
-      <v-btn @click="selectComponent('labels')">
-        <span>Labels</span>
-        <v-icon v-if="selectedComponent == 'labels'">mdi-label</v-icon>
+      <v-btn @click="selectComponent('priorities')">
+        <span>Priorities</span>
+        <v-icon v-if="selectedComponent == 'priorities'">mdi-label</v-icon>
         <v-icon v-else>mdi-label-outline</v-icon>
       </v-btn>
     </v-bottom-navigation>
@@ -43,12 +43,12 @@
 <script>
 import contacts from "~/components/contacts.vue";
 import favourites from "~/components/favourites.vue";
-import labels from "~/components/labels.vue";
+import priorities from "~/components/priorities.vue";
 export default {
   components: {
     contacts: contacts,
     favourites: favourites,
-    labels: labels,
+    priorities: priorities,
   },
   data() {
     return {
