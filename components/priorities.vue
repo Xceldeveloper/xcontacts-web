@@ -26,7 +26,7 @@
               link
               v-for="(contact, index) in work_prority"
               :key="index"
-              @click="clickedContact(index)"
+              @click="clickedWorkPrority(index)"
             >
               <v-list-item-avatar size="55" :color="getRandColor()">
                 <v-img
@@ -67,7 +67,7 @@
               link
               v-for="(contact, index) in family_prority"
               :key="index"
-              @click="clickedContact(index)"
+              @click="clickedFamilyPrority(index)"
             >
               <v-list-item-avatar size="55" :color="getRandColor()">
                 <v-img
@@ -108,7 +108,7 @@
               link
               v-for="(contact, index) in emergency_prority"
               :key="index"
-              @click="clickedContact(index)"
+              @click="clickedEmergencyPrority(index)"
             >
               <v-list-item-avatar size="55" :color="getRandColor()">
                 <v-img
@@ -141,18 +141,31 @@
         </div>
       </v-tab-item>
     </v-tabs>
+
+    <contactinfo
+      @close="showInfo = false"
+      :id="selectedIndex"
+      :canShow="showInfo"
+    />
   </div>
 </template>
 
 <script>
 import utils from "~/mixins/utils.js";
+
+import contactinfo from "~/components/contactinfo.vue";
 export default {
   mixins: [utils],
+  components: {
+    contactinfo,
+  },
   data() {
     return {
       work_prority: [],
       family_prority: [],
       emergency_prority: [],
+      selectedIndex: -1,
+      showInfo: false,
     };
   },
   mounted() {
@@ -166,8 +179,17 @@ export default {
       var arr = ["red", "green", "brown", "yellow"];
       return arr[Math.floor(Math.random() * arr.length)];
     },
-    clickedContact(index) {
-      //console.log(this.contacts[index].name);
+    clickedWorkPrority(index) {
+      this.selectedIndex = this.work_prority[index].id;
+      this.showInfo = true;
+    },
+    clickedFamilyPrority(index) {
+      this.selectedIndex = this.family_prority[index].id;
+      this.showInfo = true;
+    },
+    clickedEmergencyPrority(index) {
+      this.selectedIndex = this.emergency_prority[index].id;
+      this.showInfo = true;
     },
   },
 };
