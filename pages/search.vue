@@ -5,6 +5,7 @@
       <v-spacer></v-spacer>
       <v-text-field
         dense
+        autofocus
         hide-details
         placeholder="Search..."
         max-width="500px"
@@ -110,7 +111,7 @@ export default {
     },
     clickedContact(index) {
 
-      this.selectedIndex = this.contacts[index].id 
+      this.selectedIndex = this.filtered_contact[index].id 
       this.showInfo = true
      
       //add to search history
