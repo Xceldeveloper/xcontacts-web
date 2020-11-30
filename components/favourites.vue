@@ -1,11 +1,11 @@
 <template>
   <div id="containerx">
-    <v-list v-if="contacts.length > 0">
-      <v-list-item link v-for="(contact, index) in contacts" :key="index">
+    <v-list v-if="contacts.length > 0"   >
+      <v-list-item link v-for="(contact, index) in contacts" :key="index" @click="clickedContact(index)">
         <v-list-item-avatar
           size="55"
           :color="getRandColor()"
-          @click="clickedContact(index)"
+        
         >
           <v-img
             style="border-radius: 50%"
@@ -19,46 +19,53 @@
             </template>
           </v-img>
         </v-list-item-avatar>
-        <v-list-item-title @click="clickedContact(index)">
+        <v-list-item-title>
           {{ contact.name }}
         </v-list-item-title>
       </v-list-item>
     </v-list>
     <v-row v-else class="fill-height ma-0" align="center" justify="center">
       <v-card elevation="0" color="transparent">
-        <v-card-text> No Favourite </v-card-text>
+        <v-card-text> No Favourites </v-card-text>
       </v-card>
     </v-row>
 
-    <v-btn
-      fab
-      color="primary"
-      style="position: absolute; right: 20px; bottom: 20px"
-      ><v-icon>mdi-plus</v-icon></v-btn
-    >
+    
+
+ <contactinfo @close="showInfo= false" :id="selectedIndex" :canShow="showInfo"/>
+   
   </div>
 </template>
 
 <script>
 import utils from "~/mixins/utils.js";
+import contactinfo from "~/components/contactinfo.vue"
 export default {
-      mixins: [utils],
+  mixins: [utils],
+  components:{
+    contactinfo
+  },
   data() {
     return {
-      contacts: [
-      ],
+      contacts: [],
+      selectedIndex:-1,
+      showInfo:false
     };
   },
-  mounted(){
-   this.contacts = this.getFavourites()
+  mounted() {
+    this.contacts = this.getFavourites();
   },
+
   methods: {
     getRandColor(index) {
+      //random background color for avatar
       var arr = ["red", "green", "brown", "yellow"];
       return arr[Math.floor(Math.random() * arr.length)];
     },
     clickedContact(index) {
-      console.log(this.contacts[index].name);
+     // console.log(this.contacts[index].name);
+      this.selectedIndex = this.contacts[index].id 
+      this.showInfo = true
     },
   },
 };
@@ -71,7 +78,6 @@ export default {
   overflow: auto;
   max-width: 800px;
   margin: auto;
-  position: relative;
   padding: 3px 0px;
 }
 </style>
