@@ -2,6 +2,9 @@
 
 [demo url](https://xcelcontacts.netlify.app/)
 
+
+ Built with Nuxt, vuetify, vue-cropperjs
+
 ## Build Setup
 
 ```bash
