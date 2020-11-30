@@ -268,9 +268,8 @@ export default {
     },
 
     SAVE_CONTACT() {
-      var idx = this.getContacts().length + 1; //id by incremment of contacts length
       var new_contact = {
-        id: idx,
+        id: Date.now() ,
         favourite: false,
         name: this.fullname,
         avatar: this.avatar,

@@ -108,10 +108,12 @@ export default {
       //refresh search history
       this.history_query = this.getSearchedContacts();
     },
-    clickedHistoryContact(index) {},
+    clickedHistoryContact(index) {
+
+    },
   },
   computed: {
-    query() {},
+
   },
   watch: {
     query(value) {

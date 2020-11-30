@@ -38,17 +38,26 @@
       ><v-icon>mdi-account-plus</v-icon></v-btn
     >
 
+
+
+ <contactinfo @close="showInfo= false" :id="selectedIndex" :canShow="showInfo"/>
    
   </div>
 </template>
 
 <script>
 import utils from "~/mixins/utils.js";
+import contactinfo from "~/components/contactinfo.vue"
 export default {
   mixins: [utils],
+  components:{
+    contactinfo
+  },
   data() {
     return {
       contacts: [],
+      selectedIndex:-1,
+      showInfo:false
     };
   },
   mounted() {
@@ -62,7 +71,9 @@ export default {
       return arr[Math.floor(Math.random() * arr.length)];
     },
     clickedContact(index) {
-      console.log(this.contacts[index].name);
+     // console.log(this.contacts[index].name);
+      this.selectedIndex = this.contacts[index].id 
+      this.showInfo = true
     },
   },
 };

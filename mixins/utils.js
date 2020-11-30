@@ -6,7 +6,7 @@ export default {
     methods: {
         getContacts() {
             var contacts = localStorage.getItem('contacts')
-            //console.log(contacts)
+            console.log(contacts)
             if (contacts == null) {
                 return []
             } else {
@@ -43,6 +43,20 @@ export default {
             }
         },
 
+        setFavourite(id, state) {
+            var array = JSON.parse(localStorage.getItem('contacts'));
+            for (let index = 0; index < array.length; index++) {
+                if (array[index].id == id) {
+                    array[index].favourite = state
+                    console.log(JSON.stringify(array[index].favourite))
+                    var updated = JSON.stringify(array)
+                    localStorage.setItem('contacts', updated)
+                    break;
+                }
+            }
+
+        },
+
         getPriority(priority) {
             var contacts = localStorage.getItem('contacts');
             if (contacts == null) {
@@ -60,33 +74,55 @@ export default {
             }
         },
 
+        getContactInfo(id) {
+            var contacts = localStorage.getItem('contacts');
+            if (contacts == null) {
+
+                return []
+
+            } else {
+                var res = JSON.parse(contacts)
+
+                var rex = res.filter((item) => {
+                    return item.id == id;
+                });
+
+                //  console.log(JSON.stringify(rex[0]))
+                return rex[0]
+            }
+        },
+
         saveNewContact(contact) {
             var contacts = localStorage.getItem('contacts');
             if (contacts == null) {
                 let contactx = []
                 contactx.push(contact)
                 let todb = JSON.stringify(contactx);
-                localStorage.setItem('contacts', todb)
+                try { localStorage.setItem('contacts', todb) } catch (err) { }
             } else {
                 var res = JSON.parse(contacts)
                 res.push(contact)
                 let todb = JSON.stringify(res);
-                localStorage.setItem('contacts', todb)
+                try { localStorage.setItem('contacts', todb) } catch (err) { }
             }
         },
 
-        addToSearchHistory(contact){
+        addToSearchHistory(contact) {
             var contacts = localStorage.getItem('search_query');
             if (contacts == null) {
                 let contactx = []
                 contactx.push(contact)
                 let todb = JSON.stringify(contactx);
-                localStorage.setItem('search_query', todb)
+                try { localStorage.setItem('search_query', todb) } catch (err) {
+
+                }
             } else {
                 var res = JSON.parse(contacts)
                 res.push(contact)
                 let todb = JSON.stringify(res);
-                localStorage.setItem('search_query', todb)
+                try { localStorage.setItem('search_query', todb) } catch (err) {
+
+                }
             }
         }
 
