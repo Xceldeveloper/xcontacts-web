@@ -1,11 +1,11 @@
 <template>
   <div id="containerx">
-    <v-list v-if="contacts.length > 0">
-      <v-list-item link v-for="(contact, index) in contacts" :key="index">
+    <v-list v-if="contacts.length > 0"   >
+      <v-list-item link v-for="(contact, index) in contacts" :key="index" @click="clickedContact(index)">
         <v-list-item-avatar
           size="55"
           :color="getRandColor()"
-          @click="clickedContact(index)"
+        
         >
           <v-img
             style="border-radius: 50%"
@@ -19,15 +19,9 @@
             </template>
           </v-img>
         </v-list-item-avatar>
-        <v-list-item-title @click="clickedContact(index)">
+        <v-list-item-title>
           {{ contact.name }}
         </v-list-item-title>
-        <v-list-item-action>
-          <v-btn icon @click="markAsFavourite(index)"
-            ><v-icon color="grey" v-if="contact.favourite">mdi-star</v-icon>
-            <v-icon color="grey" v-else>mdi-star-outline</v-icon></v-btn
-          >
-        </v-list-item-action>
       </v-list-item>
     </v-list>
     <v-row v-else class="fill-height ma-0" align="center" justify="center">
@@ -38,12 +32,13 @@
 
     <v-btn
       fab
+      to="/new"
       color="primary"
       style="position: fixed; right: 20px; bottom: 75px"
       ><v-icon>mdi-account-plus</v-icon></v-btn
     >
 
-    <v-snackbar v-model="value"> snackbarText </v-snackbar>
+   
   </div>
 </template>
 
